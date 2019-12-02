@@ -7,8 +7,15 @@
 
 # 环境准备
 * 首先需要安装python3.x环境（linux系列不需要安装）
-* 下载Chrome镜像放置指定位置
+* 下载chromedriver驱动(注意下载对应版本的驱动)，并放置指定位置（不同系统放置位置不同，请自行百度）
+```
+驱动下载地址1：http://npm.taobao.org/mirrors/chromedriver/
+驱动下载地址2：http://chromedriver.storage.googleapis.com/index.html
+```
 * 安装并开启Appium服务（appium server或启动程序均可）
+```
+客户端下载地址：https://github.com/appium/appium-desktop/releases/tag/v1.15.1
+```
 * 安装模块库
 ```
 pip3 install -r requirements.txt
