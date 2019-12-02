@@ -106,5 +106,3 @@ venv.bak/
 .idea
 reports/*.html
 logs/*.log
-config/*.yaml
-

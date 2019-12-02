@@ -11,7 +11,7 @@ class Test(unittest.TestCase):
     def setUp(self):
 
         # 启动APP
-        self.driver = get_driver('Android', 'Peso2Go', 'Reset')
+        self.driver = get_driver('Android', 'Reset')
         self.driver.implicitly_wait(5)  # 隐性等待,最长等5秒(因为前端全部都是整页加载,所以隐形等待即可)
         # 启动浏览器
         self.driver_manage = get_driver('Chrome')
