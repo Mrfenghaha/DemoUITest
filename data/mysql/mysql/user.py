@@ -9,7 +9,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # 创建对象的基类:
 Base = declarative_base()
 # 创建mysql连接方式
-mysql = "mysql+pymysql://" + mysql_account + ":" + mysql_password + "@" + mysql_ip + ":" + mysql_port
+mysql = "mysql+pymysql://%s:%s@%s:%s" % (mysql_account, mysql_password, mysql_ip, mysql_port)
 
 '''
 codes验证码
