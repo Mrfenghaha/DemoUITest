@@ -15,21 +15,23 @@ android_info_path = os.path.join(config_path, 'android.yaml')
 
 # 如果没有config/email.yaml,自动创建并写入默认值
 if not os.path.exists(email_info_path):
-    with open(email_info_path, mode='a',encoding='utf-8') as f:
+    with open(email_info_path, mode='a', encoding='utf-8') as f:
         pass  # 创建email.yaml文件,支持mac osx创建文件
     # os.mknod(email_info_path)  # 创建email.yaml文件
-    with open(email_info_path, 'w') as file:
+    with open(email_info_path, 'w', encoding='utf-8') as file:
         file.write("# 邮箱配置\n"
                    "server: xxx.xxx.xxx\n"
                    "sender: xxx@xxxxxx.com\n"
                    "password: xxxxxx\n"
                    "receiver: ['xxx@xxxxxx.com','xxx@xxxxxx.com']")
+    file.close()
 
 
 with open(email_info_path, 'r', encoding='utf-8') as file:
     # 使用load方法将读出的字符串转字典
     # 普通yaml.load(input)函数的PyYAML 5.1弃用
     email_info = yaml.full_load(file)
+    file.close()
 # 邮箱服务器
 email_server = email_info['server']
 # 邮箱发送者
@@ -42,18 +44,20 @@ email_receiver = email_info['receiver']
 
 # 如果没有config/android.yaml,自动创建并写入默认值
 if not os.path.exists(android_info_path):
-    with open(android_info_path, mode='a',encoding='utf-8') as f:
+    with open(android_info_path, mode='a', encoding='utf-8') as f:
         pass  # 创建android.yaml文件,支持mac osx创建文件
     # os.mknod(android_info_path)  # 创建android.yaml文件
-    with open(android_info_path, 'w') as file:
+    with open(android_info_path, 'w', encoding='utf-8') as file:
         file.write('# APP名称\nappName: xxx\n# APP包名\nappPackage: xxx\n# APP程序名\nappActivity: xxx\n'
                    '# 设备版本号\nplatformVersion: 6.0\n# 设备id\ndeviceName: 192.168.58.104:5555\n'
                    '# appium所在ip以及端口号\nappiumIp: http://127.0.0.1:4723/wd/hub\n')
+    file.close()
 
 with open(android_info_path, 'r', encoding='utf-8') as file:
     # 使用load方法将读出的字符串转字典;
     # 普通yaml.load(input)函数的PyYAML 5.1弃用
     android_info = yaml.full_load(file)
+    file.close()
 # 平台版本号
 platformVersion = android_info['platformVersion']
 # 设备名称
