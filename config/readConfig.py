@@ -15,9 +15,6 @@ android_info_path = os.path.join(config_path, 'android.yaml')
 
 # 如果没有config/email.yaml,自动创建并写入默认值
 if not os.path.exists(email_info_path):
-    with open(email_info_path, mode='a', encoding='utf-8') as f:
-        pass  # 创建email.yaml文件,支持mac osx创建文件
-    # os.mknod(email_info_path)  # 创建email.yaml文件
     with open(email_info_path, 'w', encoding='utf-8') as file:
         file.write("# 邮箱配置\n"
                    "server: xxx.xxx.xxx\n"
@@ -44,9 +41,6 @@ email_receiver = email_info['receiver']
 
 # 如果没有config/android.yaml,自动创建并写入默认值
 if not os.path.exists(android_info_path):
-    with open(android_info_path, mode='a', encoding='utf-8') as f:
-        pass  # 创建android.yaml文件,支持mac osx创建文件
-    # os.mknod(android_info_path)  # 创建android.yaml文件
     with open(android_info_path, 'w', encoding='utf-8') as file:
         file.write('# APP名称\nappName: xxx\n# APP包名\nappPackage: xxx\n# APP程序名\nappActivity: xxx\n'
                    '# 设备版本号\nplatformVersion: 6.0\n# 设备id\ndeviceName: 192.168.58.104:5555\n'
@@ -68,9 +62,6 @@ appium_ip = android_info['appiumIp']
 
 # 如果没有config/env.yaml,自动创建并写入默认值
 if not os.path.exists(env_info_path):
-    with open(env_info_path, mode='a',encoding='utf-8') as f:
-        pass  # 创建env.yaml文件,支持mac osx创建文件
-    # os.mknod(env_info_path)  # 创建env.yaml文件
     with open(env_info_path, 'w') as file:
         file.write('# host环境IP\nhost: http://xxx.xx.x.xx\n'
                    '# mysql服务信息\nmysql_ip: xxxx\n'
