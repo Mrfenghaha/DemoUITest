@@ -30,6 +30,7 @@ pip3 install -r requirements.txt
 * 编辑config/env/envDev.yaml文件,用于开发环境数据库连接、host设置
 * 编辑config/env/envSt.yaml文件,用于测试环境数据库连接、host设置
 * 可以添加更多环境，直接添加相应的envXx.yaml文件即可，运行用例是使用Xx作为参数即可 
+* 无需维护env.yaml文件，它仅做传输中介
 
 # 用例执行说明
 ```

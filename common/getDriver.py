@@ -5,8 +5,6 @@ from appium import webdriver as appium_webdriver
 from selenium.webdriver.chrome.options import Options
 from config.readConfig import *
 from common.logger import Log
-from common.baseView import Common
-from selenium.webdriver.common.by import By
 log = Log()
 
 # 读取日志配置文件,定义所使用的记录器，getlogger()参数为空，则默认使用root级别的记录器
@@ -43,20 +41,20 @@ class GetDriverAndroid:
     # 把启动android_app的功能封闭成方法
     def get_driver_android(self, reset):
 
-        appFilePath = os.path.join(cur_path, 'app', appName)
+        appFilePath = os.path.join(cur_path, 'app', app_info['appName'])
         start_info = {
             # 平台名称
             "platformName": 'Android',
             # 平台版本号
-            "platformVersion": platformVersion,
+            "platformVersion": device_info['platformVersion'],
             # 设备名称
-            'deviceName': deviceName,
+            'deviceName': device_info['deviceName'],
             # app文件地址
             'app': appFilePath,
             # app包名
-            'appPackage': appPackage,
+            'appPackage': app_info['appPackage'],
             # app程序名
-            'appActivity': appActivity,
+            'appActivity': app_info['appActivity'],
             # 是否不每次重新安装
             'noReset': reset,
             # 是否启用unicode键盘，启动可以输入中文
@@ -66,8 +64,8 @@ class GetDriverAndroid:
             # 如果达到超时时间仍未接收到新的命令时appium会自动结束会话/秒
             'newCommandTimeout': 600}
 
-        log.info('开始启动' + appName)
-        driver = appium_webdriver.Remote(appiumIp, start_info)
+        log.info('开始启动' + app_info['appName'])
+        driver = appium_webdriver.Remote(appium_info['appiumIp'], start_info)
         return driver
 
     def get_driver_android_app(self):
