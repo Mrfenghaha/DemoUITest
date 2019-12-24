@@ -37,9 +37,15 @@ email_info = email['email_info']
 # 如果没有config/android.yaml,自动创建并写入默认值
 if not os.path.exists(android_path):
     with open(android_path, 'w', encoding='utf-8') as file:
-        file.write('# APP名称\nappName: xxx\n# APP包名\nappPackage: xxx\n# APP程序名\nappActivity: xxx\n'
-                   '# 设备版本号\nplatformVersion: 6.0\n# 设备id\ndeviceName: 192.168.58.104:5555\n'
-                   '# appium所在ip以及端口号\nappiumIp: http://127.0.0.1:4723/wd/hub\n')
+        file.write('app_info:\n'
+                   '  # APP名称\n  appName: xxx\n'
+                   '  # APP包名\n  appPackage: xxx\n'
+                   '  # APP程序名\n  appActivity: xxx\n'
+                   'device_info:\n'
+                   '  # 设备版本号\n  platformVersion: 6.0\n'
+                   '  # 设备id\n  deviceName: 192.168.58.104:5555\n'
+                   'appium_info:\n'
+                   '  #appium所在ip以及端口号\n  appiumIp: http://127.0.0.1:4723/wd/hub\n')
     file.close()
 
 with open(android_path, 'r', encoding='utf-8') as file:
@@ -59,10 +65,8 @@ appium_info = android['appium_info']
 if not os.path.exists(env_path):
     with open(env_path, 'w') as file:
         file.write('# host环境IP\nhost: http://xxx.xx.x.xx\n'
-                   '# mysql服务信息\nmysql_ip: xxxx\n'
-                   'mysql_port: 3306\n'
-                   'mysql_account: xxxx\n'
-                   'mysql_password: xxxx\n')
+                   '# mysql服务信息\nmysql_info:\n  ip:xxxx\n  port: 3306\n  account: xxxx\n  password: xxxx\n'
+                   '# mongodb服务信息\nmongodb_info:\n  ip:xxxx\n  port: 3306\n  account: xxxx\n  password: xxxx\n')
 
 with open(env_path, 'r', encoding='utf-8') as file:
     # 使用load方法将读出的字符串转字典;
