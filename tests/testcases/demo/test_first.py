@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -
 import unittest
-from time import sleep
 from data.data_create.data_create import Data
 from common.getDriver import get_driver
-from suites.demoApp.suite_login import login
-from suites.demoWeb.suite_login_manage import login_manage
+from tests.suite.demoApp.suite_login import login
+from tests.suite.demoWeb.suite_login_manage import login_manage
 
 
 class Test(unittest.TestCase):

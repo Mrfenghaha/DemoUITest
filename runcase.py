@@ -11,7 +11,7 @@ from common.envSpecify import env_specify
 
 # 当前脚本所在的文件绝对路径
 cur_path = os.path.dirname(os.path.realpath(__file__))
-
+res_path = os.path.join(cur_path, "result")
 
 # 将当前路径设置为python的临时环境变量，用于命令执行
 # 需要设置是因为项目存在多处相互调用
@@ -20,7 +20,7 @@ cur_path = os.path.dirname(os.path.realpath(__file__))
 
 def add_api(suite, name):
     # 指定测试目录
-    case_path = os.path.join(cur_path, "testcases/" + suite)
+    case_path = os.path.join(cur_path, "tests/testcase/" + suite)
     if name == 'all':
         # 定义测试目录为指定目录
         discover = unittest.defaultTestLoader.discover(case_path, pattern="*.py", top_level_dir=None)
@@ -37,7 +37,7 @@ def run_api(all_api):
 
     # 指定报告存储位置以及报告名称
     now = time.strftime("%Y-%m-%d-%H-%M-%S")
-    report_path = os.path.join(cur_path, "reports")
+    report_path = os.path.join(res_path, "reports")
     # 如果没有reports文件就创建一个文件
     if not os.path.exists(report_path):
         os.mkdir(report_path)

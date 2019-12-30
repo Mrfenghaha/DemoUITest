@@ -2,7 +2,7 @@
 from time import sleep
 from config.readConfig import *
 from common.baseView import Common
-from pages.demoWeb.page_login import LoginDefault
+from tests.page.demoWeb.page_login import LoginDefault
 
 
 def login_manage(driver, data):
