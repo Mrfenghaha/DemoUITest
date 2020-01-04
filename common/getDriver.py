@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -
-import os
 from selenium import webdriver as selenium_webdriver
 from appium import webdriver as appium_webdriver
 from selenium.webdriver.chrome.options import Options
-from config.readConfig import *
+from common.readConfig import *
 from common.logger import Log
 log = Log()
 

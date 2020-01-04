@@ -14,6 +14,11 @@ email_path = os.path.join(config_path, 'email.yaml')
 android_path = os.path.join(config_path, 'android.yaml')
 
 
+# 如果没有config,自动创建
+if not os.path.exists(config_path):
+    os.mkdir(config_path)  # 创建config文件夹
+
+
 # 如果没有config/email.yaml,自动创建并写入默认值
 if not os.path.exists(email_path):
     with open(email_path, 'w', encoding='utf-8') as file:

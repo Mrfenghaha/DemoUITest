@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -
 from time import sleep
-from config.readConfig import *
+from common.readConfig import *
 from common.baseView import Common
 from tests.page.demoWeb.page_login import LoginDefault
 

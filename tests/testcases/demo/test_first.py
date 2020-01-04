@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -
 import unittest
-from data.data_create.data_create import Data
+from data.data_create import DataCreate
 from common.getDriver import get_driver
 from tests.suite.demoApp.suite_login import login
 from tests.suite.demoWeb.suite_login_manage import login_manage
@@ -19,7 +19,7 @@ class Test(unittest.TestCase):
     def test_case(self):
         """APP登录-Web登录"""
         # 准备测试数据
-        data = dict(Data().data_create(), **Data().data_create())
+        data = dict(DataCreate().data_create(), **DataCreate().data_create())
         # APP登录
         login(self.driver, data)
 
