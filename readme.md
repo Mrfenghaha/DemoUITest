@@ -7,10 +7,19 @@
 
 # 环境准备
 * 首先需要安装python3.x环境（linux系列不需要安装）
-* 下载chromedriver驱动(注意下载对应版本的驱动)，并放置指定位置（不同系统放置位置不同，请自行百度）
+* 下载chromedriver驱动(注意下载对应版本的驱动)，并放置指定位置
 ```
 驱动下载地址1：http://npm.taobao.org/mirrors/chromedriver/
 驱动下载地址2：http://chromedriver.storage.googleapis.com/index.html
+
+ubuntu
+sudo mv chromedriver /usr/bin/chromedriver
+
+mac
+sudo mv chromedriver /usr/local/bin
+
+windows放在python安装路径的Scripts/文件下
+C:\Users\Administrator\AppData\Local\Programs\Python\Python36\Scripts
 ```
 * 安装并开启Appium服务（appium server或启动程序均可）
 ```
