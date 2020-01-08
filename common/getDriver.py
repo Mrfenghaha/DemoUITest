@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -
+import time
 from selenium import webdriver as selenium_webdriver
 from appium import webdriver as appium_webdriver
 from selenium.webdriver.chrome.options import Options
 from common.readConfig import *
 from common.logger import Log
-log = Log()
 
-# 读取日志配置文件,定义所使用的记录器，getlogger()参数为空，则默认使用root级别的记录器
+log = Log(logs_path, '%s.log' % time.strftime('%Y-%m-%d'))
 cur_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
-class GetDriverWeb:
+class GetDriverWeb():
     def __init__(self, form):
         self.form = form
 
@@ -34,13 +34,13 @@ class GetDriverWeb:
 
 
 class GetDriverAndroid:
-    def __init__(self, android, reset):
+    def __init__(self, reset):
         self.reset = reset  # 是否重启，目前支持'Reset'\'noReset'
 
     # 把启动android_app的功能封闭成方法
     def get_driver_android(self, reset):
 
-        appFilePath = os.path.join(cur_path, 'app', app_info['appName'])
+        app_apk_path = os.path.join(cur_path, 'app', app_info['appName'])
         start_info = {
             # 平台名称
             "platformName": 'Android',
@@ -49,7 +49,7 @@ class GetDriverAndroid:
             # 设备名称
             'deviceName': device_info['deviceName'],
             # app文件地址
-            'app': appFilePath,
+            'app': app_apk_path,
             # app包名
             'appPackage': app_info['appPackage'],
             # app程序名

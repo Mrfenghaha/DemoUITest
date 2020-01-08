@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -
 import os
-import sys
 import time
 import unittest
+import argparse
 from common.HTMLTestRunner import HTMLTestRunner
-from common.emailSend import email_send
-from common.envSpecify import env_specify
+from common.emailSend import EmailSend
+from common.envSpecify import EnvSpecify
 # from tomorrow import threads
 
 
@@ -54,11 +54,13 @@ def run_api(all_api):
     fp.close()
 
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--env', '-e', help='环境变量参数，非必要参数')
+parser.add_argument('--suite', '-s', help='测试用例集名称(tests/testcase/目录下文件名)，必要参数', required=True)
+parser.add_argument('--name', '-n', help='测试用例名称，必要参数', required=True)
+args = parser.parse_args()
 if __name__ == "__main__":
-    env = sys.argv[1]
-    suite = sys.argv[2]
-    name = sys.argv[3]
-    env_specify(env)
-    all_api = add_api(suite, name)
+    EnvSpecify().specify(args.env)
+    all_api = add_api(args.suite, args.name)
     run_api(all_api)
-    # email_send()
+    # EmailSend().email_send()

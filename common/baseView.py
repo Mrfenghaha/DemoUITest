@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -
 import os
 import sys
-import logging
+import time
 from time import sleep
+from common import *
 from common.logger import Log
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
@@ -13,13 +14,13 @@ from selenium.webdriver.support import expected_conditions
 from selenium.common.exceptions import NoSuchElementException
 from appium.webdriver.common.touch_action import TouchAction
 from appium.webdriver.common.multi_action import MultiAction
-log = Log()
 
 
 class BaseView(object):
 
     def __init__(self, driver):
         self.driver = driver
+        self.log = Log(logs_path, '%s.log' % time.strftime('%Y-%m-%d'))
 
     # 获取一个页面,参数为url
     def get(self, *loc):
@@ -68,13 +69,13 @@ class Common(BaseView):
 
     # 允许访问位置
     def check_device_gps_btn(self):
-        log.info("===检查是否允许访问位置===")
+        self.log.info("===检查是否允许访问位置===")
         try:
             element = self.find_element(*self.device_gps_btn)
         except NoSuchElementException:
-            log.info('不需要进行gps授权!')
+            self.log.info('不需要进行gps授权!')
         else:
-            log.info('进行gps授权')
+            self.log.info('进行gps授权')
             element.click()
 
     # 手机短信权限
@@ -82,13 +83,13 @@ class Common(BaseView):
 
     # 允许访问短信
     def check_device_message_btn(self):
-        log.info("===检查是否允许访问短信===")
+        self.log.info("===检查是否允许访问短信===")
         try:
             element = self.find_element(*self.device_message_btn)
         except NoSuchElementException:
-            log.info('不需要进行短信授权!')
+            self.log.info('不需要进行短信授权!')
         else:
-            log.info('进行短信授权')
+            self.log.info('进行短信授权')
             element.click()
 
     # 手机照片权限
@@ -96,13 +97,13 @@ class Common(BaseView):
 
     # 允许访问照片
     def check_device_photo_btn(self):
-        log.info("===检查是否允许访照片、媒体内容和文件权限===")
+        self.log.info("===检查是否允许访照片、媒体内容和文件权限===")
         try:
             element = self.find_element(*self.device_photo_btn)
         except NoSuchElementException:
-            log.info('不需要进行照片授权!')
+            self.log.info('不需要进行照片授权!')
         else:
-            log.info('进行照片授权')
+            self.log.info('进行照片授权')
             element.click()
             sleep(2)
             element.click()
@@ -112,13 +113,13 @@ class Common(BaseView):
 
     # 允许通讯录短信
     def check_device_phone_book_btn(self):
-        log.info("===检查是否允许访问通讯录权限===")
+        self.log.info("===检查是否允许访问通讯录权限===")
         try:
             element = self.find_element(*self.device_phone_btn)
         except NoSuchElementException:
-            log.info('不需要进行通讯录授权!')
+            self.log.info('不需要进行通讯录授权!')
         else:
-            log.info('进行通讯录授权')
+            self.log.info('进行通讯录授权')
             element.click()
 
     # 允许所有设备权限
@@ -150,22 +151,22 @@ class Common(BaseView):
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x1, y2, x1, y1, 1000)
-            log.info('app屏幕,整体上滑' + str(n) + '次')
+            self.log.info('app屏幕,整体上滑' + str(n) + '次')
         elif way == 'down':
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x1, y1, x1, y2, 1000)
-            log.info('app屏幕,整体下滑' + str(n) + '次')
+            self.log.info('app屏幕,整体下滑' + str(n) + '次')
         elif way == 'left':
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x3, y1, x2, y1, 1000)
-            log.info('app屏幕,整体左滑' + str(n) + '次')
+            self.log.info('app屏幕,整体左滑' + str(n) + '次')
         elif way == 'right':
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x2, y1, x3, y1, 1000)
-            log.info('app屏幕,整体右滑' + str(n) + '次')
+            self.log.info('app屏幕,整体右滑' + str(n) + '次')
         else:
             print('way参数错误')
         # 等待2s使滑动结束
@@ -181,12 +182,12 @@ class Common(BaseView):
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x1, y2, x1, y1, 1000)
-            log.info('app日期插件,上滑' + str(n) + '次')
+            self.log.info('app日期插件,上滑' + str(n) + '次')
         elif way == 'down':
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x1, y1, x1, y2, 1000)
-            log.info('app日期插件,下滑' + str(n) + '次')
+            self.log.info('app日期插件,下滑' + str(n) + '次')
         self.swipe(x1, y1, x1, y2, 1000)
         # 等待0.5s使滑动结束
         sleep(0.5)

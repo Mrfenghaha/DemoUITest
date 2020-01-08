@@ -2,29 +2,19 @@
 import os
 import time
 import logging
-
-
-# log_path是存放日志的路径
-cur_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-res_path = os.path.join(cur_path, "result")
-log_path = os.path.join(res_path, 'logs')
-# 如果不存在这个result/logs文件夹，就自动创建一个
-if not os.path.exists(res_path):
-    os.mkdir(res_path)
-if not os.path.exists(log_path):
-    os.mkdir(log_path)
+from common import *
 
 
 class Log():
-    def __init__(self):
+    def __init__(self, path, name):
         # 文件的命名
-        self.log_name = os.path.join(log_path, '%s.log' % time.strftime('%Y-%m-%d'))
+        self.log_name = os.path.join(path, name)
         self.logger = logging.getLogger()
         # 由于终端只需要打印info等级，所以这里打印等级设为info，如果需要打印debug将一下三个都改为改为(logging.DEBUG)即可
         self.logger.setLevel(logging.DEBUG)
         # 日志输出格式
         # self.formatter = logging.Formatter('%(asctime)s - %(filename)s - %(levelname)s: %(message)s')
-        self.formatter = logging.Formatter('%(asctime)s - %(levelname)s: %(message)s')
+        self.formatter = logging.Formatter('%(asctime)s | %(name)s | %(message)s')
 
     def __console(self, level, message):
         # 创建一个FileHandler，用于写到本地
