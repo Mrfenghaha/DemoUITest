@@ -95,7 +95,7 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 为了做到真正的自动化扩展使用数据生成器，使用生成器按照规则生成想要的数据字典，在编写TestCase的使用直接调用生成器并提取参数即可
 
 ## 编写规范介绍
-为了代码的可读性，指定了一些编写[规范](https://github.com/fengyibo963/DemoUITest/blob/master/docs/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png)说明（可根据自己喜好修改）
+为了代码的可读性，指定了一些编写[规范](https://github.com/fengyibo963/DemoUITest/blob/master/docs/%E7%BC%96%E5%86%99%E8%AF%B4%E6%98%8E.md)说明（可根据自己喜好修改）
 
 ## 项目结构详细介绍
 
