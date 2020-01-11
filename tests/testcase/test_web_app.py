@@ -3,7 +3,6 @@ import unittest
 from data.data_create import DataCreate
 from common.getDriver import get_driver
 from tests.suite.demoApp.suite_login import login
-from tests.suite.demoWeb.suite_login_manage import login_manage
 
 
 class Test(unittest.TestCase):
@@ -22,9 +21,6 @@ class Test(unittest.TestCase):
         data = dict(DataCreate().data_create(), **DataCreate().data_create())
         # APP登录
         login(self.driver, data)
-
-        # Web登录
-        login_manage(self.driver_manage, data)
 
     def tearDown(self):
         self.driver.quit()

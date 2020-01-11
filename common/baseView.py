@@ -303,6 +303,11 @@ class Common(BaseView):
         handles = driver.window_handles  # 获取当前窗口句柄集合（列表类型）
         driver.switch_to.window(handles[num - 1])  # 跳转到第num个窗口
 
+    # 根据文本获取元素定位信息
+    def get_element(self, text):
+        element = (By.XPATH, "//*[text()='" + text + "']")
+        return element
+
     # ```````````````````````````````````通用方法封装````````````````````````````````````
     # 禁止结果打印
     def block_print(self):
