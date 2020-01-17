@@ -135,22 +135,23 @@ runcase.py脚本为功能测试用例执行统一入口
 **查看帮助--help**
 ```
 python3 runcase.py --help
-usage: runcase.py [-h] [--env ENV] --suite SUITE --name NAME
+usage: runcase.py [-h] [--env ENV] [--collection COLLECTION] --name NAME
 
 optional arguments:
   -h, --help            show this help message and exit
   --env ENV, -e ENV     环境变量参数，非必要参数
-  --suite SUITE, -s SUITE
-                        测试用例集名称(tests/testcase/目录下文件名)，必要参数
+  --collection COLLECTION, -c COLLECTION
+                        测试用例集合名称，非必要参数(testcases中用于划分用例集合的文件夹名,当未划分用例集合时不需要)
   --name NAME, -n NAME  测试用例名称，必要参数
 ```
 
 **执行用例**
 
 ```
-python3 runcase.py -n $env -s $suite -n $name  # 在$env环境下,执行用例,$suite文件夹路径,$name文件名称或all(all即可该用例集下左右用例)
+python3 runcase.py -e $env -c $collection -n $name  # 在$env环境下,执行用例,$collection文件夹路径,$name文件名称或all(all即可该用例集下左右用例)
 例：
-python3 runcase.py -s api_test -n test_login
-python3 runcase.py -s api_test -n all
-python3 runcase.py -s api_test -n all
+python3 runcase.py -c api_test -n test_login
+python3 runcase.py -c api_test -n all
+python3 runcase.py -e St -c api_test -n all
 ```
+
