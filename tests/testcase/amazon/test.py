@@ -46,10 +46,6 @@ class Test(unittest.TestCase):
         # 断言提示文本(判断提示文案是100%符合)
         text_type = AddSuccessPage(self.driver).get_add_success()
         self.assertEqual(text_type, success_text)
-        # 断言提示文本(判断提示文案,有指定内容出现即可)
-        # text_type = AddSuccessPage(self.driver).add_success_type
-        # result = Common(self.driver).check_text_exist(text_type, success_text)
-        # self.assertEqual(result, True)
 
         # 断言价格(价格需要100%符合)
         amount = AddSuccessPage(self.driver).get_amount()

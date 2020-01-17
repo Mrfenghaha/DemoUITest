@@ -3,67 +3,6 @@
 
 由于考虑不同项目的情况，为保持灵活性，本框架对于用例编写部分并未进行更多的封装，使用本框架仍需要一些Python编码基础
 
-
-# 环境/使用介绍
-## 环境说明
-* 安装python3环境
-* 安装相关模块库
-```
-pip3 install -r requirements.txt
-```
-* 下载chromedriver驱动(注意下载对应版本的驱动)，并放置指定位置
-```
-驱动下载地址1：http://npm.taobao.org/mirrors/chromedriver/
-驱动下载地址2：http://chromedriver.storage.googleapis.com/index.html
-
-ubuntu
-sudo mv chromedriver /usr/bin/chromedriver
-
-mac
-sudo mv chromedriver /usr/local/bin
-
-windows放在python安装路径的Scripts/文件下
-C:\Users\Administrator\AppData\Local\Programs\Python\Python36\Scripts
-```
-* 安装并开启Appium服务（appium server或启动程序均可）
-```
-客户端下载地址：https://github.com/appium/appium-desktop/releases/tag/v1.15.1
-```
-## 配置说明
-1. 邮件发送
-    * config/email.yaml文件,用于测试报告邮件发送，需要配置邮箱相关信息
-2. 配置env环境参数
-    * config/env.yaml文件,用于数据库连接、host设置
-    * envDev.yaml/envSt.yaml分别为对应环境的配置信息
-    * 可以添加更多环境，直接添加相应的envXx.yaml文件即可，运行用例时使用Xx作为环境参数即可 
-    * 当需要多环境执行时，env.yaml文件变为数据传输中介不再需要维护
-
-## 功能用例执行说明
-runcase.py脚本为功能测试用例执行统一入口
-
-**查看帮助--help**
-```
-python3 runcase.py --help
-usage: runcase.py [-h] [--env ENV] --suite SUITE --name NAME
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --env ENV, -e ENV     环境变量参数，非必要参数
-  --suite SUITE, -s SUITE
-                        测试用例集名称(tests/testcase/目录下文件名)，必要参数
-  --name NAME, -n NAME  测试用例名称，必要参数
-```
-
-**执行用例**
-
-```
-python3 runcase.py -n $env -s $suite -n $name  # 在$env环境下,执行用例,$suite文件夹路径,$name文件名称或all(all即可该用例集下左右用例)
-例：
-python3 runcase.py -s api_test -n test_login
-python3 runcase.py -s api_test -n all
-python3 runcase.py -s api_test -n all
-```
-
 # 框架详细介绍
 
 ![](https://github.com/fengyibo963/DemoUITest/blob/master/docs/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png)
@@ -72,7 +11,7 @@ python3 runcase.py -s api_test -n all
 该框架分层使用PO设计模式，BDD理念
 
 * Page（页面）：封装页面为类，并且封装所有操作
-* Suite（动作）：封装动作(行为)（动作：例如登录动作，需要填写账号、填写密码、点击登录按钮）
+* Suite（套件）：封装动作(行为)（例如下拉框选择需要三步"点击下拉框、选择选项、点击确认"，为了更好的复用可以将三步合为一个行为直接调用）
 * TestCase（用例）：使用动作(行为)拼接工作流，并且对于所有动作可以进行断言
 
 由于某些操作自身就可以定义为动作，因为TestCase既可以使用Suite拼接，也可以使用Page进行拼接（或混合拼接）。
@@ -145,9 +84,73 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 |-- requirements.txt    # 该文件记录所有需要用的框架（以便更换环境一键安装）
 ```
 
-## 相关库介绍
-* 该框架使用Selenium、Appium库作为UI操作的基础库
-* 使用Unittest作为用例集、用例执行调度
-* 使用Pymysql连接操作Mysql数据库
-* 使用pymongo连接操作MongoDB数据库
-* 使用Yaml文件作为配置文件格式
+
+# 环境/使用介绍
+## 环境说明
+* 安装python3环境
+* 安装相关模块库
+```
+pip3 install -r requirements.txt
+```
+## Selenium
+* 下载浏览器驱动
+
+对于Web的UI自动化测试需要使用浏览器驱动，根据不同的浏览器下载相应的驱动即可
+
+例如Chrome浏览器需要下载ChromeDriver驱动(注意下载对应版本的驱动)，并放置指定位置
+```
+驱动下载地址1：http://npm.taobao.org/mirrors/chromedriver/
+驱动下载地址2：http://chromedriver.storage.googleapis.com/index.html
+
+ubuntu
+sudo mv chromedriver /usr/bin/chromedriver
+
+mac
+sudo mv chromedriver /usr/local/bin
+
+windows放在python安装路径的Scripts/文件下
+C:\Users\Administrator\AppData\Local\Programs\Python\Python36\Scripts
+```
+## Appium
+客户端下载地址：https://github.com/appium/appium-desktop/releases
+
+Ubuntu安装参考[指南](https://blog.csdn.net/baidu_36943075/article/details/103985826)
+
+Mac安装参考指南[指南](https://www.jianshu.com/p/d36ff3707862)
+
+Windows安装参考[指南](https://www.cnblogs.com/lgqboke/p/9776503.html)
+
+## 配置说明
+1. 邮件发送
+    * config/email.yaml文件,用于测试报告邮件发送，需要配置邮箱相关信息
+2. 配置env环境参数
+    * config/env.yaml文件,用于数据库连接、host设置
+    * envDev.yaml/envSt.yaml分别为对应环境的配置信息
+    * 可以添加更多环境，直接添加相应的envXx.yaml文件即可，运行用例时使用Xx作为环境参数即可 
+    * 当需要多环境执行时，env.yaml文件变为数据传输中介不再需要维护
+
+## 功能用例执行说明
+runcase.py脚本为功能测试用例执行统一入口
+
+**查看帮助--help**
+```
+python3 runcase.py --help
+usage: runcase.py [-h] [--env ENV] --suite SUITE --name NAME
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --env ENV, -e ENV     环境变量参数，非必要参数
+  --suite SUITE, -s SUITE
+                        测试用例集名称(tests/testcase/目录下文件名)，必要参数
+  --name NAME, -n NAME  测试用例名称，必要参数
+```
+
+**执行用例**
+
+```
+python3 runcase.py -n $env -s $suite -n $name  # 在$env环境下,执行用例,$suite文件夹路径,$name文件名称或all(all即可该用例集下左右用例)
+例：
+python3 runcase.py -s api_test -n test_login
+python3 runcase.py -s api_test -n all
+python3 runcase.py -s api_test -n all
+```
