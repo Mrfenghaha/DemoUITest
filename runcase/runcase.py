@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -
-import os
 import time
 import unittest
+from common import *
 from runcase.HTMLTestRunner import HTMLTestRunner
 # from tomorrow import threads
-
-
-# 当前脚本所在的文件绝对路径
-cur_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-res_path = os.path.join(cur_path, "result")
-
-# 将当前路径设置为python的临时环境变量，用于命令执行
-# 需要设置是因为项目存在多处相互调用
-# os.putenv("PYTHONPATH", cur_path)
 
 
 class RunCase:
@@ -40,11 +31,7 @@ class RunCase:
     def run_case(self):
         # 指定报告存储位置以及报告名称
         now = time.strftime("%Y-%m-%d-%H-%M-%S")
-        report_path = os.path.join(res_path, "reports")
-        # 如果没有reports文件就创建一个文件
-        if not os.path.exists(report_path):
-            os.mkdir(report_path)
-        report_abspath = os.path.join(report_path, now+".html")
+        report_abspath = os.path.join(reports_path, now+".html")
         print("报告地址:%s" % report_abspath)
 
         # 执行所有用例，并将结果写入HTML测试报告中
