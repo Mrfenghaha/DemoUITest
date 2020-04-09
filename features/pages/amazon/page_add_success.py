@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -
-from common.baseView import Common
-from common.getDriver import log
-from selenium.webdriver.common.by import By
+from features.common.baseView import BaseView, By
 """
 亚马逊-添加商品入购物车成功页
 """
 
 
-class AddSuccessPage(Common):
+class AddSuccessPage(BaseView):
 
     # 添加购物车成功提示定位
     add_success_type = (By.ID, 'huc-v2-order-row-confirm-text')
@@ -16,10 +14,8 @@ class AddSuccessPage(Common):
 
     # 获取添加成功提示文本
     def get_add_success(self):
-        add_success = self.find_element(*self.add_success_type).text
-        return add_success
+        return self.element_get_text(self.add_success_type)
 
     # 获取金额文本
     def get_amount(self):
-        amount = self.find_element(*self.amount_type).text
-        return amount
+        return self.element_get_text(self.amount_type)

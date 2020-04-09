@@ -16,11 +16,11 @@ from appium.webdriver.common.touch_action import TouchAction
 from appium.webdriver.common.multi_action import MultiAction
 
 
-class BaseView(object):
+class View(object):
 
     def __init__(self, driver):
         self.driver = driver
-        self.log = Log(logs_path, '%s.log' % time.strftime('%Y-%m-%d'))
+        self.log = Log(logs_path, '%s.log' % time.strftime('%Y-%m-%d')).info
 
     # 获取一个页面,参数为url
     def get(self, *loc):
@@ -61,7 +61,48 @@ class BaseView(object):
         return WebDriverWait(self.driver, t, s)  # 可以配合until或者until_not方法，再辅助以一些判断条件，就可以构成这样一个场景
 
 
-class Common(BaseView):
+class BaseView(View):
+    # `````````````````````````````````````基本操作封装````````````````````````````````````````
+    def element_click(self, element):
+        self.find_element(*element).click()
+
+    def element_click_by_text(self, text):
+        element = self.get_element_by_text(text)
+        self.find_element(*element).click()
+
+    def element_input(self, element, text):
+        self.find_element(*element).send_keys(text)
+
+    def element_get_text(self, element):
+        return self.find_element(*element).text
+
+    # ```````````````````````````````````通用方法封装````````````````````````````````````
+    # 根据文本获取元素定位信息
+    def get_element_by_text(self, text):
+        element = (By.XPATH, "//*[text()='" + text + "']")
+        return element
+
+    # 检查元素是否存在
+    def check_element_if_exist(self, a):
+        if self.find_elements(*a) == []:
+            return False
+        else:
+            return True
+
+    # 禁止结果打印
+    def block_print(self):
+        sys.stdout = open(os.devnull, 'w')
+
+    # 继续结果打印
+    def enable_print(self):
+        sys.stdout = sys.__stdout__
+
+    # ```````````````````````````````````web常用操作````````````````````````````````````
+    # 浏览器窗口切换
+    def browser_switch_tab(self, num):
+        driver = self.driver
+        handles = driver.window_handles  # 获取当前窗口句柄集合（列表类型）
+        driver.switch_to.window(handles[num - 1])  # 跳转到第num个窗口
 
     # ```````````````````````````````````app设备权限授权操作````````````````````````````````````
     # 手机gps权限
@@ -69,13 +110,13 @@ class Common(BaseView):
 
     # 允许访问位置
     def check_device_gps_btn(self):
-        self.log.info("===检查是否允许访问位置===")
+        self.log("===检查是否允许访问位置===")
         try:
             element = self.find_element(*self.device_gps_btn)
         except NoSuchElementException:
-            self.log.info('不需要进行gps授权!')
+            self.log('不需要进行gps授权!')
         else:
-            self.log.info('进行gps授权')
+            self.log('进行gps授权')
             element.click()
 
     # 手机短信权限
@@ -83,13 +124,13 @@ class Common(BaseView):
 
     # 允许访问短信
     def check_device_message_btn(self):
-        self.log.info("===检查是否允许访问短信===")
+        self.log("===检查是否允许访问短信===")
         try:
             element = self.find_element(*self.device_message_btn)
         except NoSuchElementException:
-            self.log.info('不需要进行短信授权!')
+            self.log('不需要进行短信授权!')
         else:
-            self.log.info('进行短信授权')
+            self.log('进行短信授权')
             element.click()
 
     # 手机照片权限
@@ -97,13 +138,13 @@ class Common(BaseView):
 
     # 允许访问照片
     def check_device_photo_btn(self):
-        self.log.info("===检查是否允许访照片、媒体内容和文件权限===")
+        self.log("===检查是否允许访照片、媒体内容和文件权限===")
         try:
             element = self.find_element(*self.device_photo_btn)
         except NoSuchElementException:
-            self.log.info('不需要进行照片授权!')
+            self.log('不需要进行照片授权!')
         else:
-            self.log.info('进行照片授权')
+            self.log('进行照片授权')
             element.click()
             sleep(2)
             element.click()
@@ -113,13 +154,13 @@ class Common(BaseView):
 
     # 允许通讯录短信
     def check_device_phone_book_btn(self):
-        self.log.info("===检查是否允许访问通讯录权限===")
+        self.log("===检查是否允许访问通讯录权限===")
         try:
             element = self.find_element(*self.device_phone_btn)
         except NoSuchElementException:
-            self.log.info('不需要进行通讯录授权!')
+            self.log('不需要进行通讯录授权!')
         else:
-            self.log.info('进行通讯录授权')
+            self.log('进行通讯录授权')
             element.click()
 
     # 允许所有设备权限
@@ -151,22 +192,22 @@ class Common(BaseView):
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x1, y2, x1, y1, 1000)
-            self.log.info('app屏幕,整体上滑' + str(n) + '次')
+            self.log('app屏幕,整体上滑' + str(n) + '次')
         elif way == 'down':
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x1, y1, x1, y2, 1000)
-            self.log.info('app屏幕,整体下滑' + str(n) + '次')
+            self.log('app屏幕,整体下滑' + str(n) + '次')
         elif way == 'left':
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x3, y1, x2, y1, 1000)
-            self.log.info('app屏幕,整体左滑' + str(n) + '次')
+            self.log('app屏幕,整体左滑' + str(n) + '次')
         elif way == 'right':
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x2, y1, x3, y1, 1000)
-            self.log.info('app屏幕,整体右滑' + str(n) + '次')
+            self.log('app屏幕,整体右滑' + str(n) + '次')
         else:
             print('way参数错误')
         # 等待2s使滑动结束
@@ -182,12 +223,12 @@ class Common(BaseView):
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x1, y2, x1, y1, 1000)
-            self.log.info('app日期插件,上滑' + str(n) + '次')
+            self.log('app日期插件,上滑' + str(n) + '次')
         elif way == 'down':
             for i in range(n):
                 sleep(0.3)
                 self.swipe(x1, y1, x1, y2, 1000)
-            self.log.info('app日期插件,下滑' + str(n) + '次')
+            self.log('app日期插件,下滑' + str(n) + '次')
         self.swipe(x1, y1, x1, y2, 1000)
         # 等待0.5s使滑动结束
         sleep(0.5)
@@ -295,34 +336,6 @@ class Common(BaseView):
         else:
             self.find_element(*self.device_date_year_type).click()
             self.find_element(*self.device_date_affirm_type).click()
-
-    # ```````````````````````````````````web常用操作````````````````````````````````````
-    # 浏览器窗口切换
-    def switch_tab(self, num):
-        driver = self.driver
-        handles = driver.window_handles  # 获取当前窗口句柄集合（列表类型）
-        driver.switch_to.window(handles[num - 1])  # 跳转到第num个窗口
-
-    # 根据文本获取元素定位信息
-    def get_element(self, text):
-        element = (By.XPATH, "//*[text()='" + text + "']")
-        return element
-
-    # ```````````````````````````````````通用方法封装````````````````````````````````````
-    # 禁止结果打印
-    def block_print(self):
-        sys.stdout = open(os.devnull, 'w')
-
-    # 继续结果打印
-    def enable_print(self):
-        sys.stdout = sys.__stdout__
-
-    # 检查元素是否存在
-    def check_element_exist(self, a):
-        if self.find_elements(*a) == []:
-            return False
-        else:
-            return True
 
     # ````````````````app`````````````````
     # 屏幕滑动,至某元素出现

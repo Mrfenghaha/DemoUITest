@@ -5,7 +5,6 @@ from appium import webdriver as appium_webdriver
 from selenium.webdriver.chrome.options import Options
 from common.readConfig import *
 from common.logger import Log
-
 log = Log(logs_path, '%s.log' % time.strftime('%Y-%m-%d'))
 cur_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
@@ -18,9 +17,9 @@ class GetDriverWeb():
         if self.form == 'chrome':
             log.info('开始启动chrome浏览器')
             driver = selenium_webdriver.Chrome()
+            driver.implicitly_wait(20)  # 隐性等待,最长等20秒
             # 将浏览器窗口最大化
             driver.maximize_window()
-            driver.implicitly_wait(1)
             return driver
         elif self.form == 'h5':
             log.info('开始启动chrome浏览器-phone')
@@ -29,7 +28,7 @@ class GetDriverWeb():
             chrome_options.add_argument('disable-infobars')
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
             driver = selenium_webdriver.Chrome(chrome_options=chrome_options)
-            driver.implicitly_wait(1)
+            driver.implicitly_wait(20)  # 隐性等待,最长等20秒
             return driver
 
 
@@ -65,6 +64,7 @@ class GetDriverAndroid:
 
         log.info('开始启动' + app_info['appName'])
         driver = appium_webdriver.Remote(appium_info['appiumIp'], start_info)
+        driver.implicitly_wait(20)  # 隐性等待,最长等20秒
         return driver
 
     def get_driver_android_app(self):
@@ -74,8 +74,6 @@ class GetDriverAndroid:
             no_reset = True
 
         driver = self.get_driver_android(no_reset)
-        # 隐形等待,等待app加载完成
-        driver.implicitly_wait(20)
         return driver
         
 
@@ -84,16 +82,14 @@ def get_driver(form, *parm):
 
     if form == 'Chrome':
         driver = GetDriverWeb('chrome').get_driver_web()
-        return driver
     elif form == 'H5':
         driver = GetDriverWeb('h5').get_driver_web()
-        return driver
     elif form == 'Android':
         reset = parm[0]  # 是否重启，目前支持'Reset'\'noReset'
         driver = GetDriverAndroid(reset).get_driver_android_app()
-        return driver
     else:
         print('参数错误请检查')
+    return driver
 
 
 if __name__ == "__main__":

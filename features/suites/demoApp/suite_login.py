@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -
-from tests.page.demoApp.page_home import HomePage
+from features.pages.demoApp.page_home import HomePage
 
 
 def login(driver, data):

@@ -43,15 +43,11 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 ```
 |-- common      # 基础通用方法，使用过程中基本无需修改（可以二次开发自行拓展）
 |    -- __init__.py  # 所有需要自动创建的文件和默认文件
-|    -- baseView.py  # 定义driver方法，将所有基础方法重定义(一是为了统计所有使用到的基础方法便于其他人学习;二是为了简化项目编码维护)
 |    -- dataType.py  # 字符格式转换,同一封装使用
-|    -- emailSend.py  # 测试执行后的邮件发送配置(收件人配置)
-|    -- envSpecify.py  # env环境切换方法
-|    -- HTMLTestRunner.py  # unittest测试执行生成测试报告的报告文件
 |    -- logger.py  # 功能测试log输出配置
 |    -- readConfig.py  # 读取环境变量
-|    -- getDriver.py  # 启动浏览器、APP获取driver
 |-- config
+|    -- android.yaml  # 安卓设备的配置文件
 |    -- email.yaml  # 邮件发送邮箱配置
 |    -- env.yaml  # 环境变量
 |    -- envDev.yaml  # 开发环境配置文件，可以根据自己需要添加删除
@@ -66,9 +62,11 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 |-- docs
 |-- result
 |    -- logs   # 生成的log文件存储位置
-|    -- logsLocust   # 生成的Locust的log文件存储位置
 |    -- reports     # 生成的测试报告存储位置
-|-- tests
+|-- features
+|    -- common
+|        -- baseView.py  # 定义driver方法，将所有基础方法重定义(一是为了统计所有使用到的基础方法便于其他人学习;二是为了简化项目编码维护)
+|        -- getDriver.py  # 启动浏览器、APP获取driver
 |    -- pages
 |        -- xxxxxxx  # 某产品(app或web)
 |            -- page_xxxx.py  # 该产品某一页面
@@ -80,7 +78,12 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 |        -- page_xxxxxxx  # 某产品线页面测试用例
 |        -- smokec_xxxxxxx  # 某产品线冒烟测试用例
 |            -- test_xxx.py  # 测试用例文件
-|-- runcase.py     # 通过参数执行任一测试用例或测试用例集
+|-- runcase      # 运行用例的方法
+|    -- emailSend.py  # 测试执行后的邮件发送配置(收件人配置)
+|    -- envSpecify.py  # env环境切换方法
+|    -- HTMLTestRunner.py  # unittest测试执行生成测试报告的报告文件
+|    -- runcase.py     # 通过参数执行任一测试用例或测试用例集
+|-- main.py    # 自动化框架执行入口
 |-- requirements.txt    # 该文件记录所有需要用的框架（以便更换环境一键安装）
 ```
 
@@ -134,8 +137,8 @@ runcase.py脚本为功能测试用例执行统一入口
 
 **查看帮助--help**
 ```
-python3 runcase.py --help
-usage: runcase.py [-h] [--env ENV] [--collection COLLECTION] --name NAME
+python3 main.py --help
+usage: main.py [-h] [--env ENV] [--collection COLLECTION] --name NAME
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -148,10 +151,10 @@ optional arguments:
 **执行用例**
 
 ```
-python3 runcase.py -e $env -c $collection -n $name  # 在$env环境下,执行用例,$collection文件夹路径,$name文件名称或all(all即可该用例集下左右用例)
+python3 main.py -e $env -c $collection -n $name  # 在$env环境下,执行用例,$collection文件夹路径,$name文件名称或all(all即可该用例集下左右用例)
 例：
-python3 runcase.py -c api_test -n test_login
-python3 runcase.py -c api_test -n all
-python3 runcase.py -e St -c api_test -n all
+python3 main.py -c api_test -n test_login
+python3 main.py -c api_test -n all
+python3 main.py -e St -c api_test -n all
 ```
 
