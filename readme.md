@@ -44,6 +44,7 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 |-- common      # 基础通用方法，使用过程中基本无需修改（可以二次开发自行拓展）
 |    -- __init__.py  # 所有需要自动创建的文件和默认文件
 |    -- dataType.py  # 字符格式转换,同一封装使用
+|    -- getDriver.py  # 启动浏览器、APP获取driver
 |    -- logger.py  # 功能测试log输出配置
 |    -- readConfig.py  # 读取环境变量
 |-- config
@@ -57,32 +58,29 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 |        -- xxxx.py  # 某些特殊数据的生成
 |    -- dbOperation  # 数据库数据操作  
 |        -- xxxx.py  # 某些数据库操作的封装
-|    -- data_create.py  # 某产品线测试数据生成
-|    -- db_operation.py  # 数据库方法的统一调用入口
 |-- docs
 |-- result
 |    -- logs   # 生成的log文件存储位置
 |    -- reports     # 生成的测试报告存储位置
 |-- features
-|    -- common
+|    -- element
 |        -- baseView.py  # 定义driver方法，将所有基础方法重定义(一是为了统计所有使用到的基础方法便于其他人学习;二是为了简化项目编码维护)
-|        -- getDriver.py  # 启动浏览器、APP获取driver
 |    -- pages
 |        -- xxxxxxx  # 某产品(app或web)
-|            -- page_xxxx.py  # 该产品某一页面
+|            -- xxxx_page.py  # 该产品某一页面
 |    -- suitess
 |        -- xxxxxxx  # 某产品(app或web)
-|            --suite_xxxx.py  # 该产品通用封装的模块
+|            --xxxx_suite.py  # 该产品通用封装的模块
 |    -- testcases
 |        -- func_xxxxxxx  # 某产品线功能逻辑测试用例
 |        -- page_xxxxxxx  # 某产品线页面测试用例
 |        -- smokec_xxxxxxx  # 某产品线冒烟测试用例
-|            -- test_xxx.py  # 测试用例文件
+|            -- xxx_test.py  # 测试用例文件
 |-- runcase      # 运行用例的方法
 |    -- emailSend.py  # 测试执行后的邮件发送配置(收件人配置)
 |    -- envSpecify.py  # env环境切换方法
-|    -- HTMLTestRunner.py  # unittest测试执行生成测试报告的报告文件
-|    -- runcase.py     # 通过参数执行任一测试用例或测试用例集
+|    -- htmlTestRunner.py  # unittest测试执行生成测试报告的报告文件
+|    -- runCase.py     # 通过参数执行任一测试用例或测试用例集
 |-- main.py    # 自动化框架执行入口
 |-- requirements.txt    # 该文件记录所有需要用的框架（以便更换环境一键安装）
 ```

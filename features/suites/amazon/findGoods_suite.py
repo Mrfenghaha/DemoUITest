@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -
-from features.common.baseView import BaseView
-from features.pages.amazon.page_show_list import ShowListPage
+from features.element.baseView import BaseView
+from features.pages.amazon.showList_page import ShowListPage
 
 
-def find_goods(driver, name):
+def find_goods_action(driver, name):
     name_type = BaseView(driver).get_element_by_text(name)
     check_result = BaseView(driver).check_element_if_exist(name_type)  # 检查元素是否存在
     a = 1

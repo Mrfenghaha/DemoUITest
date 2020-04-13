@@ -340,26 +340,10 @@ class BaseView(View):
     # ````````````````app`````````````````
     # 屏幕滑动,至某元素出现
     def device_screen_swipe_custom(self, way, element_a):
-        if way == 'up':
-            while self.find_elements(*element_a) == []:
-                self.device_screen_swipe('up', 1)
-                if self.find_elements(*element_a) != []:
-                    break
-        elif way == 'down':
-            while self.find_elements(*element_a) == []:
-                self.device_screen_swipe('down', 1)
-                if self.find_elements(*element_a) != []:
-                    break
-        elif way == 'left':
-            while self.find_elements(*element_a) == []:
-                self.device_screen_swipe('left', 1)
-                if self.find_elements(*element_a) != []:
-                    break
-        elif way == 'right':
-            while self.find_elements(*element_a) == []:
-                self.device_screen_swipe('right', 1)
-                if self.find_elements(*element_a) != []:
-                    break
+        while self.find_elements(*element_a) == []:
+            self.device_screen_swipe(way, 1)
+            if self.find_elements(*element_a) != []:
+                break
 
     # 点击错误重试,该方法只会循环一次
     def click_error_retry(self, exist, element_a, element_b):

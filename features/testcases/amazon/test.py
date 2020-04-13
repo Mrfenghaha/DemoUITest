@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -
 import unittest
-from features.common.getDriver import get_driver
-from features.common.baseView import BaseView
-from features.pages.amazon.page_home import HomePage
-from features.pages.amazon.page_show_list import ShowListPage
-from features.pages.amazon.page_show_goods import ShowGoodsPage
-from features.pages.amazon.page_add_success import AddSuccessPage
-from features.suites.amazon.suite_find_goods import find_goods
+from common.getDriver import get_driver
+from features.element.baseView import BaseView
+from features.pages.amazon.home_page import HomePage
+from features.pages.amazon.showList_page import ShowListPage
+from features.pages.amazon.showGoods_page import ShowGoodsPage
+from features.pages.amazon.addSuccess_page import AddSuccessPage
+from features.suites.amazon.findGoods_suite import find_goods_action
 
 
 class Test(unittest.TestCase):
@@ -30,7 +30,7 @@ class Test(unittest.TestCase):
         HomePage(self.driver).click_submit_action()
 
         # 判断需要的商品是否存在于当前页,不存在即翻页寻找,直至找到或到达第10页仍未找到
-        find_goods(self.driver, books_name)
+        find_goods_action(self.driver, books_name)
 
         # 点击图书
         ShowListPage(self.driver).click_name_action(books_name)

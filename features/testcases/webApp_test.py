@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -
 import unittest
-from data.data_create import DataCreate
-from features.common.getDriver import get_driver
-from features.suites.demoApp.suite_login import login
+from data.dataCreate import DataCreate
+from common.getDriver import get_driver
+from features.suites.demoApp.login_suite import login
 
 
 class Test(unittest.TestCase):
