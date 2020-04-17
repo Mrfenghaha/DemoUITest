@@ -131,7 +131,7 @@ Windows安装参考[指南](https://www.cnblogs.com/lgqboke/p/9776503.html)
     * 当需要多环境执行时，env.yaml文件变为数据传输中介不再需要维护
 
 ## 功能用例执行说明
-runcase.py脚本为功能测试用例执行统一入口
+main.py脚本为功能测试用例执行统一入口
 
 **查看帮助--help**
 ```
