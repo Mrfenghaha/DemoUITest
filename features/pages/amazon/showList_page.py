@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -
-from features.common.baseView import BaseView
+from features.element.baseView import BaseView
 
 """
 亚马逊-商品搜索列表页

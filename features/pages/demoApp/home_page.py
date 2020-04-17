@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -
-from features.common.baseView import BaseView, By
+from features.element.baseView import BaseView, By
 """
 首页 页面元素和操作(Home)
 """
