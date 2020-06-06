@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -
-import os
 import sys
 import time
 from time import sleep
 from common import *
-from common.logger import Log
+from common.log.logger import Log
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions
 from selenium.common.exceptions import NoSuchElementException
-from appium.webdriver.common.touch_action import TouchAction
-from appium.webdriver.common.multi_action import MultiAction
 
 
 class View(object):

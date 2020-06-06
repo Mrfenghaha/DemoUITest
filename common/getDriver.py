@@ -3,8 +3,8 @@ import time
 from selenium import webdriver as selenium_webdriver
 from appium import webdriver as appium_webdriver
 from selenium.webdriver.chrome.options import Options
-from common.readConfig import *
-from common.logger import Log
+from common import *
+from common.log.logger import Log
 log = Log(logs_path, '%s.log' % time.strftime('%Y-%m-%d'))
 cur_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 

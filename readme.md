@@ -38,15 +38,18 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 
 ## 项目结构详细介绍
 
-![](https://github.com/fengyibo963/DemoUITest/blob/master/docs/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png)
-
 ```
 |-- common      # 基础通用方法，使用过程中基本无需修改（可以二次开发自行拓展）
-|    -- __init__.py  # 所有需要自动创建的文件和默认文件
-|    -- dataType.py  # 字符格式转换,同一封装使用
+|    -- log      # log打印
+|        -- logger.py  # 功能测试log输出配置
+|        -- loggerLocust.py  # Locust性能测试log输出配置
+|    -- run      # 运行用例的方法
+|        -- emailSend.py  # 测试执行后的邮件发送配置(收件人配置)
+|        -- envSpecify.py  # env环境切换方法
+|        -- htmlTestRunner.py  # unittest测试执行生成测试报告的报告文件
+|        -- runCase.py     # 通过参数执行任一测试用例或测试用例集
+|    -- __init__.py  # 所有需要自动创建的文件和默认文件、读取环境变量
 |    -- getDriver.py  # 启动浏览器、APP获取driver
-|    -- logger.py  # 功能测试log输出配置
-|    -- readConfig.py  # 读取环境变量
 |-- config
 |    -- android.yaml  # 安卓设备的配置文件
 |    -- email.yaml  # 邮件发送邮箱配置
@@ -76,11 +79,6 @@ TestCase拼接为简单关键字驱动模式，使用动作的函数名或类型
 |        -- page_xxxxxxx  # 某产品线页面测试用例
 |        -- smokec_xxxxxxx  # 某产品线冒烟测试用例
 |            -- xxx_test.py  # 测试用例文件
-|-- runcase      # 运行用例的方法
-|    -- emailSend.py  # 测试执行后的邮件发送配置(收件人配置)
-|    -- envSpecify.py  # env环境切换方法
-|    -- htmlTestRunner.py  # unittest测试执行生成测试报告的报告文件
-|    -- runCase.py     # 通过参数执行任一测试用例或测试用例集
 |-- main.py    # 自动化框架执行入口
 |-- requirements.txt    # 该文件记录所有需要用的框架（以便更换环境一键安装）
 ```

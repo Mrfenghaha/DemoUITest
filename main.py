@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -
 import argparse
-from runcase.envSpecify import EnvSpecify
-from runcase.emailSend import EmailSend
-from runcase.runcase import RunCase
+from common.run.envSpecify import EnvSpecify
+from common.run.runcase import RunCase
 
 
 parser = argparse.ArgumentParser()
